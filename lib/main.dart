@@ -2,9 +2,11 @@ import 'package:sibetonapp/pages/account.dart';
 import 'package:sibetonapp/pages/cart.dart';
 import 'package:sibetonapp/pages/home.dart';
 import 'package:sibetonapp/pages/orders.dart';
+import './pages/login.dart';
+
 import 'package:flutter/material.dart';
 
-void main() => runApp(MyApp());
+void main() => runApp(Login());
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
