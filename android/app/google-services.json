@@ -1,0 +1,196 @@
+{
+    "project_info": {
+      "project_number": "572163722739",
+      "firebase_url": "https://sibeton-app.firebaseio.com",
+      "project_id": "sibeton-app",
+      "storage_bucket": "sibeton-app.appspot.com"
+    },
+    "client": [
+      {
+        "client_info": {
+          "mobilesdk_app_id": "1:572163722739:android:975223fa579e69cdaed686",
+          "android_client_info": {
+            "package_name": "com.example.flutterlogindemo"
+          }
+        },
+        "oauth_client": [
+          {
+            "client_id": "572163722739-f0jodhc0k2ulp2d0tm0qmb96fop0t5b5.apps.googleusercontent.com",
+            "client_type": 1,
+            "android_info": {
+              "package_name": "com.example.flutterlogindemo",
+              "certificate_hash": "58c81968f7210a4c145af5a3ff17531e957e8c1f"
+            }
+          },
+          {
+            "client_id": "572163722739-id0jphn1lpd6vjshdeo02rm74rumb2a1.apps.googleusercontent.com",
+            "client_type": 3
+          }
+        ],
+        "api_key": [
+          {
+            "current_key": "AIzaSyC9OgIZ1bGC_BDwImj6XtC9Q6UH7dSjzv0"
+          }
+        ],
+        "services": {
+          "appinvite_service": {
+            "other_platform_oauth_client": [
+              {
+                "client_id": "572163722739-id0jphn1lpd6vjshdeo02rm74rumb2a1.apps.googleusercontent.com",
+                "client_type": 3
+              }
+            ]
+          }
+        }
+      },
+      {
+        "client_info": {
+          "mobilesdk_app_id": "1:572163722739:android:9cc7e859c35f605aaed686",
+          "android_client_info": {
+            "package_name": "com.example.shopping_cart"
+          }
+        },
+        "oauth_client": [
+          {
+            "client_id": "572163722739-vjs86v2rrvqgk4anlr2knlcahtch99s7.apps.googleusercontent.com",
+            "client_type": 1,
+            "android_info": {
+              "package_name": "com.example.shopping_cart",
+              "certificate_hash": "58c81968f7210a4c145af5a3ff17531e957e8c1f"
+            }
+          },
+          {
+            "client_id": "572163722739-id0jphn1lpd6vjshdeo02rm74rumb2a1.apps.googleusercontent.com",
+            "client_type": 3
+          }
+        ],
+        "api_key": [
+          {
+            "current_key": "AIzaSyC9OgIZ1bGC_BDwImj6XtC9Q6UH7dSjzv0"
+          }
+        ],
+        "services": {
+          "appinvite_service": {
+            "other_platform_oauth_client": [
+              {
+                "client_id": "572163722739-id0jphn1lpd6vjshdeo02rm74rumb2a1.apps.googleusercontent.com",
+                "client_type": 3
+              }
+            ]
+          }
+        }
+      },
+      {
+        "client_info": {
+          "mobilesdk_app_id": "1:572163722739:android:a9b3a23f8f2e1eacaed686",
+          "android_client_info": {
+            "package_name": "com.semenindonesiabeton.productbeckend"
+          }
+        },
+        "oauth_client": [
+          {
+            "client_id": "572163722739-unccl0qkbrmnhtt76ir54692bjdgdka0.apps.googleusercontent.com",
+            "client_type": 1,
+            "android_info": {
+              "package_name": "com.semenindonesiabeton.productbeckend",
+              "certificate_hash": "58c81968f7210a4c145af5a3ff17531e957e8c1f"
+            }
+          },
+          {
+            "client_id": "572163722739-id0jphn1lpd6vjshdeo02rm74rumb2a1.apps.googleusercontent.com",
+            "client_type": 3
+          }
+        ],
+        "api_key": [
+          {
+            "current_key": "AIzaSyC9OgIZ1bGC_BDwImj6XtC9Q6UH7dSjzv0"
+          }
+        ],
+        "services": {
+          "appinvite_service": {
+            "other_platform_oauth_client": [
+              {
+                "client_id": "572163722739-id0jphn1lpd6vjshdeo02rm74rumb2a1.apps.googleusercontent.com",
+                "client_type": 3
+              }
+            ]
+          }
+        }
+      },
+      {
+        "client_info": {
+          "mobilesdk_app_id": "1:572163722739:android:a6db41f1e96885f9aed686",
+          "android_client_info": {
+            "package_name": "com.semenindonesiabeton.sibeton"
+          }
+        },
+        "oauth_client": [
+          {
+            "client_id": "572163722739-quubh0oehlkttk0gtcpec9i860jtagnf.apps.googleusercontent.com",
+            "client_type": 1,
+            "android_info": {
+              "package_name": "com.semenindonesiabeton.sibeton",
+              "certificate_hash": "58c81968f7210a4c145af5a3ff17531e957e8c1f"
+            }
+          },
+          {
+            "client_id": "572163722739-id0jphn1lpd6vjshdeo02rm74rumb2a1.apps.googleusercontent.com",
+            "client_type": 3
+          }
+        ],
+        "api_key": [
+          {
+            "current_key": "AIzaSyC9OgIZ1bGC_BDwImj6XtC9Q6UH7dSjzv0"
+          }
+        ],
+        "services": {
+          "appinvite_service": {
+            "other_platform_oauth_client": [
+              {
+                "client_id": "572163722739-id0jphn1lpd6vjshdeo02rm74rumb2a1.apps.googleusercontent.com",
+                "client_type": 3
+              }
+            ]
+          }
+        }
+      },
+      {
+        "client_info": {
+          "mobilesdk_app_id": "1:572163722739:android:57da6dab6455994faed686",
+          "android_client_info": {
+            "package_name": "com.semenindonesiabeton.sibetonapp"
+          }
+        },
+        "oauth_client": [
+          {
+            "client_id": "572163722739-1ihacom5iu55nmnjmb67oivdo8c9mddl.apps.googleusercontent.com",
+            "client_type": 1,
+            "android_info": {
+              "package_name": "com.semenindonesiabeton.sibetonapp",
+              "certificate_hash": "58c81968f7210a4c145af5a3ff17531e957e8c1f"
+            }
+          },
+          {
+            "client_id": "572163722739-id0jphn1lpd6vjshdeo02rm74rumb2a1.apps.googleusercontent.com",
+            "client_type": 3
+          }
+        ],
+        "api_key": [
+          {
+            "current_key": "AIzaSyC9OgIZ1bGC_BDwImj6XtC9Q6UH7dSjzv0"
+          }
+        ],
+        "services": {
+          "appinvite_service": {
+            "other_platform_oauth_client": [
+              {
+                "client_id": "572163722739-id0jphn1lpd6vjshdeo02rm74rumb2a1.apps.googleusercontent.com",
+                "client_type": 3
+              }
+            ]
+          }
+        }
+      }
+    ],
+    "configuration_version": "1"
+  }
