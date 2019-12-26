@@ -1,12 +1,12 @@
 import 'package:sibetonapp/pages/account.dart';
 import 'package:sibetonapp/pages/cart.dart';
 import 'package:sibetonapp/pages/home.dart';
-import 'package:sibetonapp/pages/login.dart';
+import 'package:sibetonapp/pages/opening.dart';
 import 'package:sibetonapp/pages/orders.dart';
 import 'package:flutter/material.dart';
 import 'package:sibetonapp/pages/register.dart';
 
-void main() => runApp(MyApp());
+void main() => runApp(OpeningPage());
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
@@ -133,15 +133,15 @@ class _MyHomePageState extends State<MyHomePage> {
 
 // saya buat class baru
 
-class Register extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'testing',
-      home:  RegisterPage(),
-      routes: <String, WidgetBuilder>{
-        '/loginpage': (BuildContext context) => LoginPage(),
-      },
-    );
-  }
-}
+//class Register extends StatelessWidget {
+//  @override
+//  Widget build(BuildContext context) {
+//    return MaterialApp(
+//      title: 'testing',
+//      home:  RegisterPage(),
+//      routes: <String, WidgetBuilder>{
+//        '/loginpage': (BuildContext context) => LoginPage(),
+//      },
+//    );
+//  }
+//}

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:sibetonapp/pages/login.dart';
 
 class Account extends StatefulWidget {
   @override
@@ -37,17 +36,17 @@ class _AccountState extends State<Account> {
               leading: Icon(Icons.favorite, color: Colors.red[800], size: 30),
             ),
           ),
-          InkWell(
-            onTap: () {
-              Navigator.push(context, MaterialPageRoute(
-                builder: (context) => LoginPage()
-              ));
-            },
-            child: ListTile(
-              title: Text('Login / Register'),
-              leading: Icon(Icons.person_pin, color: Colors.red[800], size: 30),
-            ),
-          ),
+//          InkWell(
+//            onTap: () {
+//              Navigator.push(context, MaterialPageRoute(
+//                builder: (context) => LoginPage()
+//              ));
+//            },
+//            child: ListTile(
+//              title: Text('Login / Register'),
+//              leading: Icon(Icons.person_pin, color: Colors.red[800], size: 30),
+//            ),
+//          ),
           SizedBox(height: 10.0),
           Divider(
             color: Colors.grey,
