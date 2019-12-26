@@ -1,10 +1,10 @@
 import 'package:sibetonapp/pages/account.dart';
 import 'package:sibetonapp/pages/cart.dart';
 import 'package:sibetonapp/pages/home.dart';
-import 'package:sibetonapp/pages/orders.dart';
 import 'package:sibetonapp/pages/login.dart';
-import 'package:sibetonapp/pages/register.dart';
+import 'package:sibetonapp/pages/orders.dart';
 import 'package:flutter/material.dart';
+import 'package:sibetonapp/pages/register.dart';
 
 void main() => runApp(MyApp());
 

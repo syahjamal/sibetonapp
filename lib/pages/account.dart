@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:sibetonapp/pages/login.dart';
-import 'package:sibetonapp/pages/register.dart';
 
 class Account extends StatefulWidget {
   @override
