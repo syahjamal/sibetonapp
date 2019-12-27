@@ -44,6 +44,9 @@ class _OpeningPageState extends State<OpeningPage>
     _scale = 1 - _controller.value;
     return MaterialApp(
       debugShowCheckedModeBanner: false,
+      routes: <String, WidgetBuilder>{
+        '/myapp': (BuildContext context) => MyApp()
+      },
       home: Scaffold(
         backgroundColor: Colors.red[800],
         body: Center(
@@ -109,7 +112,10 @@ class _OpeningPageState extends State<OpeningPage>
                 height: 100.0,
               ),
               DelayedAnimation(
-                child: GestureDetector(
+                child: new GestureDetector(
+                  onTap: (){
+                    Navigator.of(context).pushNamed('/myapp');
+                  },
                   onTapDown: _onTapDown,
                   onTapUp: _onTapUp,
                   child: Transform.scale(
@@ -160,11 +166,9 @@ class _OpeningPageState extends State<OpeningPage>
 
   void _onTapDown(TapDownDetails details) {
     _controller.forward();
-    MyApp();
   }
 
   void _onTapUp(TapUpDetails details) {
     _controller.reverse();
   }
-
 }
