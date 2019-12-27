@@ -1,27 +1,44 @@
+import 'package:flutter/services.dart';
 import 'package:sibetonapp/pages/account.dart';
 import 'package:sibetonapp/pages/cart.dart';
 import 'package:sibetonapp/pages/home.dart';
-import 'package:sibetonapp/pages/opening.dart';
 import 'package:sibetonapp/pages/orders.dart';
 import 'package:flutter/material.dart';
-import 'package:sibetonapp/pages/register.dart';
 
-void main() => runApp(OpeningPage());
+import 'pages/opening.dart';
+
+void main() {
+  runApp(MyApp());
+}
 
 class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setEnabledSystemUIOverlays([]);
     return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        fontFamily: 'MaisonNeue',
-        primarySwatch: Colors.red,
-      ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
       debugShowCheckedModeBanner: false,
+      title: 'Flutter Demo',
+      theme: ThemeData(primaryColor: Colors.blue),
+      initialRoute: '/',
+      onGenerateRoute: (RouteSettings settings) {
+        switch (settings.name) {
+          case '/':
+            return _buildRoute(settings, new OpeningPage());
+          case '/myapp':
+            return _buildRoute(settings, new MyHomePage());
+          default:
+            return null;
+        }
+      },
     );
   }
+}
+
+MaterialPageRoute _buildRoute(RouteSettings settings, Widget builder) {
+  return new MaterialPageRoute(
+    settings: settings,
+    builder: (BuildContext context) => builder,
+  );
 }
 
 class MyHomePage extends StatefulWidget {
@@ -127,9 +144,6 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 }
-
-
-
 
 // saya buat class baru
 
