@@ -1,13 +1,15 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:sibetonapp/pages/account.dart';
 import 'package:sibetonapp/pages/cart.dart';
 import 'package:sibetonapp/pages/home.dart';
+import 'package:sibetonapp/pages/login.dart';
 import 'package:sibetonapp/pages/orders.dart';
 
 
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
-
   final String title;
 
   @override
@@ -17,11 +19,30 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   int _selectedTab = 0;
   final _layout = [Home(), Orders(), Cart(), Account()];
-
   void _onTabItem(int index) {
     setState(() {
       _selectedTab = index;
     });
+  }
+
+  final GoogleSignIn _googleSignIn = GoogleSignIn();
+
+  bool isLoading = false;
+
+  Future<Null> handleSignOut() async {
+    setState(() {
+      isLoading = false;
+    });
+    await FirebaseAuth.instance.signOut();
+    await _googleSignIn.disconnect();
+    await _googleSignIn.signOut();
+
+    setState(() {
+      isLoading = false;
+    });
+    Navigator.of(context).pushAndRemoveUntil(
+        MaterialPageRoute(builder: (context) => LoginPage()),
+            (Route<dynamic> route) => false);
   }
 
   @override
@@ -45,7 +66,15 @@ class _MyHomePageState extends State<MyHomePage> {
               size: 30.0,
             ),
             onPressed: () {},
-          )
+          ),
+          IconButton(
+            icon: Icon(
+              Icons.exit_to_app,
+              color: Colors.red[800],
+              size: 30.0,
+            ),
+            onPressed: handleSignOut,
+          ),
         ],
       ),
 //      drawer: new Drawer(

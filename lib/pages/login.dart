@@ -45,15 +45,15 @@ class _LoginPageState extends State<LoginPage> {
 
     isLoggedIn = await _googleSignIn.isSignedIn();
     if (isLoading) {
-      Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (context) => MyHomePage()));
+//      Navigator.pushReplacement(
+//          context, MaterialPageRoute(builder: (context) => MyHomePage()));
     }
     setState(() {
       isLoading = false;
     });
   }
 
-  Future<Null> handleSignIn() async {
+  Future<FirebaseUser> handleSignIn() async {
     final GoogleSignInAccount googleUser = await _googleSignIn.signIn();
     final GoogleSignInAuthentication googleAuth =
         await googleUser.authentication;
@@ -98,6 +98,7 @@ class _LoginPageState extends State<LoginPage> {
         isLoading = false;
       });
     }
+    return firebaseUser;
   }
 
   @override

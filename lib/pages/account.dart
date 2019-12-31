@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+
 class Account extends StatefulWidget {
   @override
   _AccountState createState() => _AccountState();
@@ -23,7 +24,7 @@ class _AccountState extends State<Account> {
             decoration: new BoxDecoration(color: Colors.red[800]),
           ),
           InkWell(
-            onTap: () {},
+            onTap: (){},
             child: ListTile(
               title: Text('My Account'),
               leading: Icon(Icons.person, color: Colors.red[800], size: 30),
@@ -43,8 +44,8 @@ class _AccountState extends State<Account> {
 //              ));
 //            },
 //            child: ListTile(
-//              title: Text('Login / Register'),
-//              leading: Icon(Icons.person_pin, color: Colors.red[800], size: 30),
+//              title: Text('Sign Out'),
+//              leading: Icon(Icons.exit_to_app, color: Colors.red[800], size: 30),
 //            ),
 //          ),
           SizedBox(height: 10.0),
