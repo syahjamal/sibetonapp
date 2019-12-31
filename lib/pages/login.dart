@@ -14,7 +14,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
-
 class LoginPage extends StatefulWidget {
   @override
   _LoginPageState createState() => _LoginPageState();
@@ -23,6 +22,9 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   final GoogleSignIn _googleSignIn = GoogleSignIn();
   final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
+  final _formKey = GlobalKey<FormState>();
+  TextEditingController _emailTextController = TextEditingController();
+  TextEditingController _passwordTextController = TextEditingController();
 
   bool isLoading = false;
   bool isLoggedIn = false;
@@ -91,7 +93,8 @@ class _LoginPageState extends State<LoginPage> {
         await prefs.setString('PhotoUrl', documents[0]['photoUrl']);
       }
       Fluttertoast.showToast(msg: "Sign In Sucess");
-      Navigator.push(context, MaterialPageRoute(builder: (context)=> MyHomePage()));
+      Navigator.push(
+          context, MaterialPageRoute(builder: (context) => MyHomePage()));
     } else {
       Fluttertoast.showToast(msg: "Sign in Fail");
       setState(() {
@@ -106,22 +109,195 @@ class _LoginPageState extends State<LoginPage> {
     return Scaffold(
       body: Stack(
         children: <Widget>[
-          Center(
-            child: GoogleSignInButton(
-              onPressed: handleSignIn,
+          Image.asset(
+            'images/background.jpg',
+            fit: BoxFit.fill,
+            width: double.infinity,
+            height: double.infinity,
+          ),
+//          TODO:: Make the logo show
+
+          Container(
+            color: Colors.black.withOpacity(0.4),
+            width: double.infinity,
+            height: double.infinity,
+          ),
+
+          Container(
+            alignment: Alignment.topCenter,
+            child: Image.asset(
+              'images/Sibeton-logo.png',
+              width: 280.0,
+              height: 240.0,
             ),
           ),
-          Positioned(
-            child: Center(
-              child: isLoading
-                  ? Container(
-                      child: CircularProgressIndicator(
-                        valueColor: AlwaysStoppedAnimation<Color>(Colors.red),
-                      ),
-                      color: Colors.white.withOpacity(0.8),
-                    )
-                  : Container(),
+
+          Center(
+            child: Padding(
+              padding: const EdgeInsets.only(top: 250.0),
+              child: Center(
+                child: Form(
+                    key: _formKey,
+                    child: Column(
+                      children: <Widget>[
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Material(
+                            borderRadius: BorderRadius.circular(10.0),
+                            color: Colors.white.withOpacity(0.8),
+                            elevation: 0.0,
+                            child: Padding(
+                              padding: const EdgeInsets.only(left: 12.0),
+                              child: TextFormField(
+                                controller: _emailTextController,
+                                decoration: InputDecoration(
+                                  hintText: "Email",
+                                  icon: Icon(Icons.alternate_email),
+                                ),
+                                validator: (value) {
+                                  if (value.isEmpty) {
+                                    Pattern pattern =
+                                        r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
+                                    RegExp regex = new RegExp(pattern);
+                                    if (!regex.hasMatch(value))
+                                      return 'Please make sure your email address is valid';
+                                    else
+                                      return null;
+                                  }
+                                },
+                              ),
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Material(
+                            borderRadius: BorderRadius.circular(10.0),
+                            color: Colors.white.withOpacity(0.8),
+                            elevation: 0.0,
+                            child: Padding(
+                              padding: const EdgeInsets.only(left: 12.0),
+                              child: TextFormField(
+                                controller: _passwordTextController,
+                                decoration: InputDecoration(
+                                  hintText: "Password",
+                                  icon: Icon(Icons.lock_outline),
+                                ),
+                                validator: (value) {
+                                  if (value.isEmpty) {
+                                    return "The password field cannot be empty";
+                                  } else if (value.length < 6) {
+                                    return "The password has to be at least 6 characters long";
+                                  }
+                                  return null;
+                                },
+                              ),
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Material(
+                              borderRadius: BorderRadius.circular(20.0),
+                              color: Colors.blue[800],
+                              elevation: 0.0,
+                              child: MaterialButton(
+                                onPressed: () {},
+                                minWidth: MediaQuery.of(context).size.width,
+                                child: Text(
+                                  "Login",
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 20.0),
+                                ),
+                              )),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text(
+                            "Forgot password",
+                            textAlign: TextAlign.center,
+                            style: TextStyle(color: Colors.white),
+                          ),
+                        ),
+                        RichText(
+                            text: TextSpan(
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.w400,
+                                    fontSize: 16.0),
+                                children: [
+                              TextSpan(
+                                  text:
+                                      "Don't have an account ? click here to"),
+                              TextSpan(
+                                  text: " sign up!",
+                                  style: TextStyle(color: Colors.red)),
+                            ])),
+                        Divider(
+                          color: Colors.white,
+                        ),
+                        Text(
+                          "Other login in option",
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20.0),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: new Material(
+                                borderRadius: BorderRadius.circular(20.0),
+                                color: Colors.red[800],
+                                elevation: 0.0,
+                                child: MaterialButton(
+                                  onPressed: () {
+                                    handleSignIn();
+                                  },
+                                  minWidth: MediaQuery.of(context).size.width,
+                                  child: Row(
+                                    children: <Widget>[
+                                      Padding(
+                                        padding: const EdgeInsets.all(4.0),
+                                        child: Image.asset(
+                                          'images/google.png',
+                                          width: 30.0,
+                                          height: 30.0,
+                                        ),
+                                      ),
+                                      Text(
+                                        "google",
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 20.0),
+                                      ),
+                                    ],
+                                  ),
+                                )),
+                          ),
+                        ),
+                      ],
+                    )),
+              ),
             ),
+          ),
+
+          Visibility(
+            visible: isLoading ?? true,
+            child: Center(
+                child: Container(
+              alignment: Alignment.center,
+              child: CircularProgressIndicator(
+                valueColor: AlwaysStoppedAnimation<Color>(Colors.red),
+              ),
+              color: Colors.white.withOpacity(0.8),
+            )),
           ),
         ],
       ),
