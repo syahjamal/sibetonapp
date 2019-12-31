@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:sibetonapp/main.dart';
+import 'package:sibetonapp/pages/homepage.dart';
 
 //Button
 import 'package:flutter_auth_buttons/flutter_auth_buttons.dart';
@@ -21,12 +21,112 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  final GoogleSignIn _googleSignIn = GoogleSignIn();
+  final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
+
+  bool isLoading = false;
+  bool isLoggedIn = false;
+
+  SharedPreferences prefs;
+  FirebaseUser currentUser;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    isSignIn();
+  }
+
+  void isSignIn() async {
+    setState(() {
+      isLoading = true;
+    });
+    prefs = await SharedPreferences.getInstance();
+
+    isLoggedIn = await _googleSignIn.isSignedIn();
+    if (isLoading) {
+      Navigator.pushReplacement(
+          context, MaterialPageRoute(builder: (context) => MyHomePage()));
+    }
+    setState(() {
+      isLoading = false;
+    });
+  }
+
+  Future<Null> handleSignIn() async {
+    final GoogleSignInAccount googleUser = await _googleSignIn.signIn();
+    final GoogleSignInAuthentication googleAuth =
+        await googleUser.authentication;
+
+    AuthCredential credential = GoogleAuthProvider.getCredential(
+        idToken: googleAuth.idToken, accessToken: googleAuth.accessToken);
+    final FirebaseUser firebaseUser =
+        (await firebaseAuth.signInWithCredential(credential)).user;
+
+    if (firebaseUser != null) {
+      final QuerySnapshot result = await Firestore.instance
+          .collection('user')
+          .where('id', isEqualTo: firebaseUser.uid)
+          .getDocuments();
+
+      List<DocumentSnapshot> documents = result.documents;
+      if (documents.length == 0) {
+        Firestore.instance
+            .collection('user')
+            .document(firebaseUser.uid)
+            .setData({
+          'id': firebaseUser.uid,
+          'username': firebaseUser.displayName,
+          'photoUrl': firebaseUser.photoUrl
+        });
+
+        //Data to Local
+        currentUser = firebaseUser;
+        await prefs.setString('id', currentUser.uid);
+        await prefs.setString('username', currentUser.displayName);
+        await prefs.setString('PhotoUrl', currentUser.photoUrl);
+      } else {
+        await prefs.setString('id', documents[0]['id']);
+        await prefs.setString('username', documents[0]['username']);
+        await prefs.setString('PhotoUrl', documents[0]['photoUrl']);
+      }
+      Fluttertoast.showToast(msg: "Sign In Sucess");
+      Navigator.push(context, MaterialPageRoute(builder: (context)=> MyHomePage()));
+    } else {
+      Fluttertoast.showToast(msg: "Sign in Fail");
+      setState(() {
+        isLoading = false;
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Scaffold(
+      body: Stack(
+        children: <Widget>[
+          Center(
+            child: GoogleSignInButton(
+              onPressed: handleSignIn,
+            ),
+          ),
+          Positioned(
+            child: Center(
+              child: isLoading
+                  ? Container(
+                      child: CircularProgressIndicator(
+                        valueColor: AlwaysStoppedAnimation<Color>(Colors.red),
+                      ),
+                      color: Colors.white.withOpacity(0.8),
+                    )
+                  : Container(),
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }
-
 
 //LoginPage Bawaan
 

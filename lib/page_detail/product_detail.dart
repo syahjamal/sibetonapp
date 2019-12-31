@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sibetonapp/main.dart';
+import 'package:sibetonapp/pages/homepage.dart';
 
 class ProductDetail extends StatefulWidget {
   final productDetailname;

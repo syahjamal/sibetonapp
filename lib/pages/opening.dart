@@ -100,7 +100,7 @@ class _OpeningPageState extends State<OpeningPage>
             DelayedAnimation(
               child: new GestureDetector(
                 onTap: () {
-                  Navigator.of(context).pushNamed('/myapp');
+                  Navigator.of(context).pushNamed('/login');
                 },
                 onTapDown: _onTapDown,
                 onTapUp: _onTapUp,
