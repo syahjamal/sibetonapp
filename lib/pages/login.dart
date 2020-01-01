@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:sibetonapp/pages/homepage.dart';
 
 //Button
-import 'package:flutter_auth_buttons/flutter_auth_buttons.dart';
 
 //FireBase
 import 'package:firebase_auth/firebase_auth.dart';
@@ -13,6 +12,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 //Shared preferences & Flutter Toast
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:sibetonapp/pages/register.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -107,6 +107,7 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomPadding: false,
       body: Stack(
         children: <Widget>[
           Image.asset(
@@ -141,7 +142,8 @@ class _LoginPageState extends State<LoginPage> {
                     child: Column(
                       children: <Widget>[
                         Padding(
-                          padding: const EdgeInsets.all(8.0),
+                          padding:
+                              const EdgeInsets.fromLTRB(14.0, 8.0, 14.0, 8.0),
                           child: Material(
                             borderRadius: BorderRadius.circular(10.0),
                             color: Colors.white.withOpacity(0.8),
@@ -151,9 +153,9 @@ class _LoginPageState extends State<LoginPage> {
                               child: TextFormField(
                                 controller: _emailTextController,
                                 decoration: InputDecoration(
-                                  hintText: "Email",
-                                  icon: Icon(Icons.alternate_email),
-                                ),
+                                    hintText: "Email",
+                                    icon: Icon(Icons.alternate_email),
+                                    border: InputBorder.none),
                                 validator: (value) {
                                   if (value.isEmpty) {
                                     Pattern pattern =
@@ -170,7 +172,8 @@ class _LoginPageState extends State<LoginPage> {
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.all(8.0),
+                          padding:
+                              const EdgeInsets.fromLTRB(14.0, 8.0, 14.0, 8.0),
                           child: Material(
                             borderRadius: BorderRadius.circular(10.0),
                             color: Colors.white.withOpacity(0.8),
@@ -179,10 +182,11 @@ class _LoginPageState extends State<LoginPage> {
                               padding: const EdgeInsets.only(left: 12.0),
                               child: TextFormField(
                                 controller: _passwordTextController,
+                                obscureText: true,
                                 decoration: InputDecoration(
-                                  hintText: "Password",
-                                  icon: Icon(Icons.lock_outline),
-                                ),
+                                    hintText: "Password",
+                                    icon: Icon(Icons.lock_outline),
+                                    border: InputBorder.none),
                                 validator: (value) {
                                   if (value.isEmpty) {
                                     return "The password field cannot be empty";
@@ -196,7 +200,8 @@ class _LoginPageState extends State<LoginPage> {
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.all(8.0),
+                          padding:
+                              const EdgeInsets.fromLTRB(14.0, 8.0, 14.0, 8.0),
                           child: Material(
                               borderRadius: BorderRadius.circular(20.0),
                               color: Colors.blue[800],
@@ -222,20 +227,20 @@ class _LoginPageState extends State<LoginPage> {
                             style: TextStyle(color: Colors.white),
                           ),
                         ),
-                        RichText(
-                            text: TextSpan(
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.w400,
-                                    fontSize: 16.0),
-                                children: [
-                              TextSpan(
-                                  text:
-                                      "Don't have an account ? click here to"),
-                              TextSpan(
-                                  text: " sign up!",
-                                  style: TextStyle(color: Colors.red)),
-                            ])),
+                        Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: InkWell(
+                                onTap: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => SignUp()));
+                                },
+                                child: Text(
+                                  "Sign up",
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(color: Colors.red),
+                                ))),
                         Divider(
                           color: Colors.white,
                         ),

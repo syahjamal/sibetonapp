@@ -39,6 +39,7 @@ class _OpeningPageState extends State<OpeningPage>
     _scale = 1 - _controller.value;
     return Scaffold(
       backgroundColor: Colors.red[800],
+      resizeToAvoidBottomPadding: false,
       body: Center(
         child: Column(
           children: <Widget>[
