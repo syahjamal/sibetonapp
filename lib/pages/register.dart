@@ -1,6 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import '../db/users.dart';
+import 'package:sibetonapp/db/users.dart';
+import 'package:sibetonapp/pages/homepage.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class SignUp extends StatefulWidget {
   @override
@@ -9,6 +11,7 @@ class SignUp extends StatefulWidget {
 
 class _SignUpState extends State<SignUp> {
   final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
+  final Firestore firestore = Firestore.instance;
   final _formKey = GlobalKey<FormState>();
   UserServices _userServices = UserServices();
   TextEditingController _emailTextController = TextEditingController();
@@ -172,7 +175,8 @@ class _SignUpState extends State<SignUp> {
                                       return "The password field cannot be empty";
                                     } else if (value.length < 6) {
                                       return "The password has to be at least 6 characters long";
-                                    } else if (_passwordTextController.text !=
+                                    } else if (_confirmPasswordController
+                                            .text !=
                                         value) {
                                       return "The passwords do not match";
                                     }
@@ -198,7 +202,7 @@ class _SignUpState extends State<SignUp> {
                               color: Colors.red.shade700,
                               elevation: 0.0,
                               child: MaterialButton(
-                                onPressed: () {
+                                onPressed: () async {
                                   validateForm();
                                 },
                                 minWidth: MediaQuery.of(context).size.width,
@@ -245,17 +249,26 @@ class _SignUpState extends State<SignUp> {
     );
   }
 
-  void validateForm() async {
+  Future validateForm() async {
     FormState formState = _formKey.currentState;
-    Map value;
     if (formState.validate()) {
+      formState.reset();
       FirebaseUser user = await firebaseAuth.currentUser();
       if (user == null) {
-        firebaseAuth.createUserWithEmailAndPassword(
-            email: _emailTextController.text,
-            password: _passwordTextController.text).then((user) => {
-              _userServices.createUser(value)
-        });
+        firebaseAuth
+            .createUserWithEmailAndPassword(
+                email: _emailTextController.text,
+                password: _passwordTextController.text)
+            .then((currentUser) => {
+                  _userServices.createUser({
+                    "username": _nameTextController.text,
+                    "email": _emailTextController.text,
+                    "userId": user.uid,
+                  })
+                })
+            .catchError((err) => {print(err.toString())});
+        Navigator.pushReplacement(
+            context, MaterialPageRoute(builder: (context) => MyHomePage()));
       }
     }
   }

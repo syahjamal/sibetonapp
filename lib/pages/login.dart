@@ -156,6 +156,7 @@ class _LoginPageState extends State<LoginPage> {
                                     hintText: "Email",
                                     icon: Icon(Icons.alternate_email),
                                     border: InputBorder.none),
+                                // ignore: missing_return
                                 validator: (value) {
                                   if (value.isEmpty) {
                                     Pattern pattern =
