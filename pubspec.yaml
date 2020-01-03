@@ -24,12 +24,17 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^0.1.2
   carousel_pro: ^1.0.0
-  firebase_auth: # OTP
+  firebase_core: ^0.4.0+8
+  firebase_auth: ^0.15.0+1 # OTP
   firebase_storage:
   cloud_firestore: ^0.12.9
   google_sign_in: ^4.0.6
   avatar_glow:
   firebase_database:
+  flutter_bloc: ^3.1.0
+  equatable: ^1.0.0
+  meta: ^1.1.6
+  font_awesome_flutter: ^8.4.0
 
   #Flutter toast & Shared Preferences
   shared_preferences: ^0.5.3+4
@@ -59,6 +64,7 @@ flutter:
     - images/
     - images/cats/
     - images/products/
+    - assets/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

@@ -1,59 +1,49 @@
-import 'package:flutter/services.dart';
-import 'package:sibetonapp/pages/homepage.dart';
-import 'package:sibetonapp/pages/login.dart';
 import 'package:flutter/material.dart';
-
-import 'pages/opening.dart';
+import 'package:bloc/bloc.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:sibetonapp/authentication_bloc/bloc.dart';
+import 'package:sibetonapp/user_repository.dart';
+import 'package:sibetonapp/home_screen.dart';
+import 'package:sibetonapp/login/login.dart';
+import 'package:sibetonapp/splash_screen.dart';
+import 'package:sibetonapp/simple_bloc_delegate.dart';
 
 void main() {
-  runApp(MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    SystemChrome.setEnabledSystemUIOverlays([]);
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
-      theme: ThemeData(primaryColor: Colors.red.shade900),
-      initialRoute: '/',
-      onGenerateRoute: (RouteSettings settings) {
-        switch (settings.name) {
-          case '/':
-            return _buildRoute(settings, new OpeningPage());
-          case '/login':
-            return _buildRoute(settings, new LoginPage());
-          case '/myapp':
-            return _buildRoute(settings, new MyHomePage());
-          default:
-            return null;
-        }
-      },
-    );
-  }
-}
-
-MaterialPageRoute _buildRoute(RouteSettings settings, Widget builder) {
-  return new MaterialPageRoute(
-    settings: settings,
-    builder: (BuildContext context) => builder,
+  WidgetsFlutterBinding.ensureInitialized();
+  BlocSupervisor.delegate = SimpleBlocDelegate();
+  final UserRepository userRepository = UserRepository();
+  runApp(
+    BlocProvider(
+      create: (context) => AuthenticationBloc(
+        userRepository: userRepository,
+      )..add(AppStarted()),
+      child: App(userRepository: userRepository),
+    ),
   );
 }
 
+class App extends StatelessWidget {
+  final UserRepository _userRepository;
 
+  App({Key key, @required UserRepository userRepository})
+      : assert(userRepository != null),
+        _userRepository = userRepository,
+        super(key: key);
 
-// saya buat class baru
-
-//class Register extends StatelessWidget {
-//  @override
-//  Widget build(BuildContext context) {
-//    return MaterialApp(
-//      title: 'testing',
-//      home:  RegisterPage(),
-//      routes: <String, WidgetBuilder>{
-//        '/loginpage': (BuildContext context) => LoginPage(),
-//      },
-//    );
-//  }
-//}
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: BlocBuilder<AuthenticationBloc, AuthenticationState>(
+        builder: (context, state) {
+          if (state is Unauthenticated) {
+            return LoginScreen(userRepository: _userRepository);
+          }
+          if (state is Authenticated) {
+            return HomeScreen(name: state.displayName);
+          }
+          return SplashScreen();
+        },
+      ),
+    );
+  }
+}
