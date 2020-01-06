@@ -1,12 +1,13 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:sibetonapp/authentication_bloc/bloc.dart';
 import 'package:sibetonapp/pages/account.dart';
 import 'package:sibetonapp/pages/cart.dart';
 import 'package:sibetonapp/pages/home.dart';
 import 'package:sibetonapp/pages/login.dart';
 import 'package:sibetonapp/pages/orders.dart';
-
 
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
@@ -18,7 +19,14 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _selectedTab = 0;
-  final _layout = [Home(), Orders(), Cart(), Account()];
+  final _layout = [
+    Home(),
+    Orders(),
+    Cart(),
+    Account(
+      name: null,
+    )
+  ];
   void _onTabItem(int index) {
     setState(() {
       _selectedTab = index;
@@ -42,7 +50,7 @@ class _MyHomePageState extends State<MyHomePage> {
     });
     Navigator.of(context).pushAndRemoveUntil(
         MaterialPageRoute(builder: (context) => LoginPage()),
-            (Route<dynamic> route) => false);
+        (Route<dynamic> route) => false);
   }
 
   @override
@@ -62,35 +70,23 @@ class _MyHomePageState extends State<MyHomePage> {
         actions: <Widget>[
           IconButton(
             icon: Icon(
-              Icons.notifications,
-              color: Colors.grey,
-              size: 30.0,
-            ),
-            onPressed: () {},
-          ),
-          IconButton(
-            icon: Icon(
               Icons.exit_to_app,
               color: Colors.red[800],
               size: 30.0,
             ),
-            onPressed: handleSignOut,
+            onPressed: () {
+              BlocProvider.of<AuthenticationBloc>(context).add(
+                LoggedOut(),
+              );
+            },
           ),
         ],
       ),
-//      drawer: new Drawer(
-//        child: new ListView(
-//          children: <Widget>[
-//            new UserAccountsDrawerHeader(
-//                accountName: Text('Sulaiman Syah Jamal'),
-//                accountEmail: Text('sulaimansyahjamal@gmail.com'))
-//          ],
-//        ),
-//      ),
       body: _layout.elementAt(_selectedTab),
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
         currentIndex: _selectedTab,
+        fixedColor: Colors.red.shade900,
         onTap: _onTabItem,
         items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(

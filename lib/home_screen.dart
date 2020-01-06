@@ -12,6 +12,7 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('Home'),
+        backgroundColor: Colors.red.shade900,
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.exit_to_app),
@@ -26,7 +27,7 @@ class HomeScreen extends StatelessWidget {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: <Widget>[
-          Center(child: Text('Welcome $name!')),
+          Center(child: Text('Welcome $name')),
         ],
       ),
     );

@@ -73,7 +73,7 @@ class _HomeState extends State<Home> {
 
             //Gridview
             Container(
-              height: 300.0,
+              height: 260.0,
               child: Padding(
                 padding: const EdgeInsets.all(5.0),
                 child: Products(),

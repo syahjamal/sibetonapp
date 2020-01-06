@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 
 
 class Account extends StatefulWidget {
+  final String name;
+
+  Account({Key key, @required this.name}) : super(key: key);
+
   @override
   _AccountState createState() => _AccountState();
 }

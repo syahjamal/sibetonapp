@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:bloc/bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sibetonapp/authentication_bloc/bloc.dart';
+import 'package:sibetonapp/pages/homepage.dart';
 import 'package:sibetonapp/user_repository.dart';
 import 'package:sibetonapp/home_screen.dart';
 import 'package:sibetonapp/login/login.dart';
@@ -40,7 +41,7 @@ class App extends StatelessWidget {
             return LoginScreen(userRepository: _userRepository);
           }
           if (state is Authenticated) {
-            return HomeScreen(name: state.displayName);
+            return MyHomePage();
           }
           return SplashScreen();
         },
