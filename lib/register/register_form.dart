@@ -75,6 +75,15 @@ class _RegisterFormState extends State<RegisterForm> {
             child: Form(
               child: ListView(
                 children: <Widget>[
+                  Padding(
+                    padding: EdgeInsets.symmetric(vertical: 20),
+                    child: Image.asset(
+                      'images/Sibeton-logo.png',
+                      width: 180.0,
+                      height: 140.0,
+                    ),
+                  ),
+                  SizedBox(height: 20),
                   TextFormField(
                     controller: _emailController,
                     decoration: InputDecoration(
@@ -101,6 +110,7 @@ class _RegisterFormState extends State<RegisterForm> {
                       return !state.isPasswordValid ? 'Invalid Password' : null;
                     },
                   ),
+                  SizedBox(height: 30),
                   RegisterButton(
                     onPressed: isRegisterButtonEnabled(state)
                         ? _onFormSubmitted
